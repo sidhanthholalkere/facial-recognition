@@ -38,8 +38,8 @@ def display_image(pic, model, square=True, landmark=True):
     Returns
     -------
     
-    picture : np.array
-    picture with square/landmarks
+    ax, pic
+    
     
 
 
