@@ -1,7 +1,7 @@
 import pickle
 from pathlib import Path
-import profile
-import input
+from profile import *
+from input import *
 
 class ProfileDatabase:
     """A database that stores the names and Profiles
@@ -34,8 +34,8 @@ class ProfileDatabase:
         if self.database.get(name) is not None:
             self.database.pop(name)
 
-    def add_image_to_db(self, name, img):
-        """ adds image to database, given a name 
+    def add_image_to_db(self, name):
+        """ adds image taken from camera to database, given a name 
         (create a new profile if the name isn’t in the database, 
         otherwise add the image’s face descriptor vector to 
         the proper profile)
@@ -45,9 +45,7 @@ class ProfileDatabase:
             img: Image
 
         """
-        
-        # call method to get descriptors?
-        descriptor = 
+        descriptor = descriptors_from_camera()
 
         if self.database.get(name) is not None:
             profile = self.database.get(name)
