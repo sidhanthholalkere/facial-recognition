@@ -1,6 +1,7 @@
 import pickle
 from pathlib import Path
-
+import profile
+import input
 
 class ProfileDatabase:
     """A database that stores the names and Profiles
@@ -46,11 +47,15 @@ class ProfileDatabase:
         """
         
         # call method to get descriptors?
+        descriptor = 
 
-        # add params
-        new_profile = Profile()
+        if self.database.get(name) is not None:
+            profile = self.database.get(name)
+            profile.add_descriptor(descriptor)
+        else:
+            profile = Profile(name, descriptor)
 
-        self.add_profile(new_profile)
+        self.add_profile(name, profile)
 
     def load_database(self, path):
         """
