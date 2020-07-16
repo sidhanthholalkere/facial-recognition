@@ -32,14 +32,27 @@ def whispers(adj_matrix, descriptor):
     """
     node_list = adjmatrix_to_nodes(adj_matrix, descriptor)
     cnt = 0
-    while(cnt<1000): #need to update condition
+    label_cnt = []
+    while cnt<1000:
         rand_node_indx = np.random.randint(0, len(node_list))
-        test_node = node_list[rand_node_indx]
+        rand_node = node_list[rand_node_indx]
         freq = np.zeros(len(node_list), dtype=int)
-        for i in range(len(test_node.neighbors)):
-            freq[test_node.neighbors[i]] += 1
-        test_node(np.argmax(freq))
-        cnt += 1
+
+        for i in range(len(rand_node.neighbors)):
+            freq[rand_node.neighbors[i]] += 1
+        rand_node(np.argmax(freq))
+
+        alive_labels = []
+
+        for test_node in node_list:
+            if test_node.label not in alive_labels:
+                alive_labels.append(test_node.label)
+        label_cnt.append(len(alive_labels))
+
+        if len(label_cnt)>3:
+            if label_cnt[-1] == label_cnt[-2] and label_cnt[-2] == label_cnt[-3]:
+                cnt += 1
+
     return node_list
 
 
