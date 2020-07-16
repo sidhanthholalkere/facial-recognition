@@ -6,7 +6,8 @@ def adjmatrix_to_nodes(adj_matrix, descriptor):
 
     Parameters
     ----------
-    adj_matrix : shape (N,N) numpy.ndarray of 0s and 1s that shows which nodes are connected
+    adj_matrix : shape (N,N) numpy.ndarray that shows how close nodes are connected(the greater the number the closer
+    the connection)
         connections are determined by cosine similarities
 
     descriptor : shape (N,) list containing the descriptor array for each of the pictures
@@ -19,7 +20,7 @@ def adjmatrix_to_nodes(adj_matrix, descriptor):
     for i in range(adj_matrix.shape[0]):
         neighbors = []
         for j in range(adj_matrix.shape[1]):
-            if adj_matrix[i][j] == 1:
+            if adj_matrix[i][j] != 0:
                 neighbors.append(j)
         node_list.append(node(i, neighbors, descriptor[i]))
     return node_list
@@ -39,7 +40,7 @@ def whispers(adj_matrix, descriptor):
         freq = np.zeros(len(node_list), dtype=int)
 
         for i in range(len(rand_node.neighbors)):
-            freq[rand_node.neighbors[i]] += 1
+            freq[rand_node.neighbors[i]] += adj_matrix[rand_node.id][rand_node.neighbors[i]]
         rand_node(np.argmax(freq))
 
         alive_labels = []
