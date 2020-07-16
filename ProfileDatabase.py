@@ -2,6 +2,7 @@ import pickle
 from pathlib import Path
 from profile import *
 from input import *
+from cosdist import cosine_dist
 
 class ProfileDatabase:
     """A database that stores the names and Profiles
