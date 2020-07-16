@@ -17,7 +17,7 @@ def display_image(pic, model, square=True, landmark=True):
             for i in range(len(landmark)):        # Get the landmarks/parts for the face in box d.
                 ax.plot(landmark[i, 0], landmark[i, 1], '+', color="blue")         # Draw the face landmarks on the screen.
 
-    
+    return ax, pic
 
     """
 
