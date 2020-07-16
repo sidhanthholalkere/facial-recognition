@@ -1,8 +1,8 @@
 
 
 def cosine_dist(d1, d2):
-    return 1 - (np.dot(d1, d2)) / (np.linalg.norm(d1)* np.linalg.norm(d2))
-"""
+
+    """
 
     takes image and returns image with face in box/features highlighted
     
@@ -21,6 +21,8 @@ def cosine_dist(d1, d2):
     cosine distance of d1 and d2
     
     """
+    return 1 - (np.dot(d1, d2)) / (np.linalg.norm(d1)* np.linalg.norm(d2))
+
 
 
 
