@@ -4,7 +4,7 @@ import numpy as np
 from matplotlib.patches import Rectangle
 
 
-def display_image(pic, model, square=True, landmark=True):
+def display_image(pic, model, database):
 
 
     """
@@ -17,18 +17,15 @@ def display_image(pic, model, square=True, landmark=True):
     model : FacenetModel()
     inited facenet model
 
-    square : boolean
-    True if we want to show the square
-
-    landmark : boolean
-    True if we want to show landmarks
+    database: ProfileDatabase
+    the database we are using
     
     Returns
     -------
     
-    ax, pic
+    plt
 
-    the ax and pic from the plot
+    the plot with the squares on it 
     
     """
 
@@ -38,14 +35,17 @@ def display_image(pic, model, square=True, landmark=True):
 
     boxes, probabilities, landmarks = model.detect(pic)
 
-
     
     for box, prob, landmark in zip(boxes, probabilities, landmarks):
+        print(box)
         # draw the box on the screen
         ax.add_patch((Rectangle(box[:2], *(box[2:] - box[:2]), fill=None, lw=2, color="red")))
+        ax.text(box[0:1], box[1:2]-10, "name", color="white")
 
-
-
+    #query database for each face
+    
+    #use matplotlib to print the label
+    
     return(plt)
 
 
