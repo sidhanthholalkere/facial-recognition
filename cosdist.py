@@ -4,8 +4,8 @@ def cosine_dist(d1, d2):
 
     """
 
-    takes image and returns image with face in box/features highlighted
-    
+    takes 2 d vectors and returns cosine distance
+
     Parameters
     ----------
     d1 : numpy array
