@@ -76,6 +76,30 @@ class ProfileDatabase:
 
         self.add_profile(name, profile)
 
+    def match_descriptor(self, descriptor, threshold=0.5):
+        """
+        Determines which profile the descriptor matches
+
+        Parameters
+        ----------
+        descriptor : np.ndarray
+            512-d descriptor for the face
+
+        threshold : float
+            threshold for cosine similarity
+
+        Returns
+        -------
+        str
+            name of person it matches
+        """
+        for i, (k, v) in enumerate(self.database.items()):
+            if cosine_dist(descriptor, v.mean_descriptor) <= threshold:
+                v.add_descriptor(descriptor)
+                return v.name
+
+        print('No match found')
+
     def load_database(self, path):
         """
         takes in the path of the database, and returns loaded database
