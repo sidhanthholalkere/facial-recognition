@@ -55,6 +55,27 @@ class ProfileDatabase:
 
         self.add_profile(name, profile)
 
+    def add_image_from_path_to_db(self, name, path):
+        """ adds image taken from camera to database, given a name 
+        (create a new profile if the name isn’t in the database, 
+        otherwise add the image’s face descriptor vector to 
+        the proper profile)
+        -------
+            name: String
+                name of the face in the image
+            img: Image
+
+        """
+        descriptor = descriptors_from_img_path(path)
+
+        if self.database.get(name) is not None:
+            profile = self.database.get(name)
+            profile.add_descriptor(descriptor)
+        else:
+            profile = Profile(name, descriptor)
+
+        self.add_profile(name, profile)
+
     def load_database(self, path):
         """
         takes in the path of the database, and returns loaded database
@@ -68,9 +89,9 @@ class ProfileDatabase:
         # loads dictionary/database of Profiles
         path = Path(path)
         with open(path, mode="rb") as opened_file:
-            self.database = pickle.load(opened_file)
+            return pickle.load(opened_file)
 
-        # return 'file does not exist'
+        return 'file does not exist'
 
     def save_database(self, filename):
         """
