@@ -9,17 +9,16 @@ def cosine_dist(d1, d2):
     Parameters
     ----------
     d1 : numpy array
+    first d vector
 
-    d2 : numpy array
-
+    d2 : numpy array    
+    2nd d vector
 
     
     Returns
     -------
     
-    ax, pic
-
-    the ax and pic from the plot
+    cosine distance of d1 and d2
     
     """
 
