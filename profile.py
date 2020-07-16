@@ -35,4 +35,4 @@ class Profile:
         calculates mean descriptor for face
         """
         # calculate mean descriptor
-        self.mean_descriptor = np.mean(self.face_descriptors)
+        self.mean_descriptor = np.mean(self.face_descriptors, axis=0)
