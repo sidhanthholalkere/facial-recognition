@@ -1,7 +1,8 @@
 import pickle
 from pathlib import Path
-from profile import *
-from input import *
+import profile
+import input
+import cosdist
 
 class ProfileDatabase:
     """A database that stores the names and Profiles
@@ -45,13 +46,13 @@ class ProfileDatabase:
             img: Image
 
         """
-        descriptor = descriptors_from_camera()
+        descriptor = input.descriptors_from_camera()
 
         if self.database.get(name) is not None:
             profile = self.database.get(name)
             profile.add_descriptor(descriptor)
         else:
-            profile = Profile(name, descriptor)
+            profile = profile.Profile(name, descriptor)
 
         self.add_profile(name, profile)
 
@@ -66,13 +67,13 @@ class ProfileDatabase:
             img: Image
 
         """
-        descriptor = descriptors_from_img_path(path)
+        descriptor = input.descriptors_from_img_path(path)
 
         if self.database.get(name) is not None:
             profile = self.database.get(name)
             profile.add_descriptor(descriptor)
         else:
-            profile = Profile(name, descriptor)
+            profile = profile.Profile(name, descriptor)
 
         self.add_profile(name, profile)
 
@@ -94,7 +95,8 @@ class ProfileDatabase:
             name of person it matches
         """
         for i, (k, v) in enumerate(self.database.items()):
-            if cosine_dist(descriptor, v.mean_descriptor) <= threshold:
+            print(v.mean_descriptor.shape)
+            if cosdist.cosine_dist(descriptor, v.mean_descriptor) <= threshold:
                 v.add_descriptor(descriptor)
                 return v.name
 
@@ -113,9 +115,9 @@ class ProfileDatabase:
         # loads dictionary/database of Profiles
         path = Path(path)
         with open(path, mode="rb") as opened_file:
-            return pickle.load(opened_file)
+            self.database = pickle.load(opened_file)
 
-        return 'file does not exist'
+        #return 'file does not exist'
 
     def save_database(self, filename):
         """
@@ -125,4 +127,4 @@ class ProfileDatabase:
                 the name of the file
         """
         with open(filename, mode="wb") as opened_file:
-            return pickle.dump(self, opened_file)
+            return pickle.dump(self.database, opened_file)
