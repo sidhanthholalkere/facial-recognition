@@ -24,7 +24,7 @@ class ProfileDatabase:
         """
         self.database[name] = profile
     
-    def remove_profile(self, name, profile):
+    def remove_profile(self, name):
         """ Removes a profile to the database, takes in the name/key
             -----
                 name: String
@@ -32,6 +32,25 @@ class ProfileDatabase:
         """
         if self.database.get(name) is not None:
             self.database.pop(name)
+
+    def add_image_to_db(self, name, img):
+        """ adds image to database, given a name 
+        (create a new profile if the name isn’t in the database, 
+        otherwise add the image’s face descriptor vector to 
+        the proper profile)
+        -------
+            name: String
+                name of the face in the image
+            img: Image
+
+        """
+        
+        # call method to get descriptors?
+
+        # add params
+        new_profile = Profile()
+
+        self.add_profile(new_profile)
 
     def load_database(self, path):
         """
