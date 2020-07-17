@@ -16,7 +16,7 @@ class Profile:
         # add face descriptors
         self.face_descriptors = face_descriptors
         self.name = name
-        self.mean_descriptor = 0
+        self.mean_descriptor = np.mean(self.face_descriptors, axis=0)
 
     def add_descriptor(self, descriptor):
         """
@@ -28,4 +28,4 @@ class Profile:
             vector that describes a face
         """
         self.face_descriptors = np.vstack([self.face_descriptors, descriptor[0]])
-        self.mean_descriptor = np.mean(face_descriptors, axis=0)
+        self.mean_descriptor = np.mean(self.face_descriptors, axis=0)
