@@ -1,5 +1,5 @@
 import pickle
-from profile_class import Profile
+from .profile_class import Profile
 from . import utils
 from pathlib import Path
 
@@ -49,6 +49,8 @@ class ProfileDatabase:
 
         if self.database.get(name) is not None:
             prof = self.database.get(name)
+            print(prof)
+            print(prof.__dict__.keys())
             prof.add_descriptor(descriptor)
         else:
             prof = Profile(name, descriptor)

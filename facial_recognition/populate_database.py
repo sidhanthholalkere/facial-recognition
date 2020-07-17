@@ -5,7 +5,7 @@ DB = ProfileDatabase()
 
 DB.load_database("facialDB.pkl")
 
-print(DB.database.keys())
+# print(DB.database.keys())
 
 #DB.add_image_from_path_to_db("Ines", "Images/Ines1.PNG")
 
