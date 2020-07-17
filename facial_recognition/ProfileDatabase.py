@@ -14,16 +14,16 @@ class ProfileDatabase:
         # and Profile object as the value
         self.database = {}
 
-    def add_profile(self, name, profile):
+    def add_profile(self, name, prof):
         """ Adds a profile to the database, takes in the name and
             Profile object
             -----
                 name: String
                     name of the profile
-                profile: Profile
+                prof: Profile
                     profile object of the name
         """
-        self.database[name] = profile
+        self.database[name] = prof
     
     def remove_profile(self, name):
         """ Removes a profile to the database, takes in the name/key
@@ -48,12 +48,12 @@ class ProfileDatabase:
         descriptor = utils.descriptors_from_camera()
 
         if self.database.get(name) is not None:
-            profile = self.database.get(name)
-            profile.add_descriptor(descriptor)
+            prof = self.database.get(name)
+            prof.add_descriptor(descriptor)
         else:
-            profile = profile.Profile(name, descriptor)
+            prof = profile.Profile(name, descriptor)
 
-        self.add_profile(name, profile)
+        self.add_profile(name, prof)
 
     def add_image_from_path_to_db(self, name, path):
         """ adds image taken from camera to database, given a name 
