@@ -1,8 +1,8 @@
-import whispers
-from cosdist_to_adjmatrix import cosdist_to_adjmatrix
-import utils
-from os import listdir
-from os.path import isfile, join
+from facial_recognition.whispers import whispers
+from facial_recognition.cosdist_to_adjmatrix import cosdist_to_adjmatrix
+from facial_recognition.utils import descriptors_from_img_path
+from pathlib import Path
+
 
 
 def whispers_alg(file_path):
@@ -20,9 +20,11 @@ def whispers_alg(file_path):
     """
 
     descriptor_list = []
-    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
-    for file in onlyfiles:
-        descriptor_list.append(utils.descriptors_from_img_path(file))
+    path = Path(file_path)
+    for file in path.iterdir():
+        file = file.resolve().as_posix()
+        #print(descriptors_from_img_path(file).shape)
+        descriptor_list.append(descriptors_from_img_path(file))
 
     threshold = 0.5 #update when value is confirmed
 
