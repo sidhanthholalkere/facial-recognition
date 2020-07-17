@@ -19,6 +19,6 @@ def cosdist_to_adjmatrix(picture_descriptors, cutoff):
     adjacency_matrix = adjacency_matrix.reshape(picture_descriptors.shape[0], picture_descriptors.shape[0])
     for i in range(adjacency_matrix.shape[0]):
         for j in range(adjacency_matrix.shape[1]):
-            if cosine_dist() < cutoff:
-                adjacency_matrix[i][j] = 1/(cosine_dist() ** 2)
+            if cosine_dist(picture_descriptors[i], picture_descriptors[j]) < cutoff:
+                adjacency_matrix[i][j] = 1/(cosine_dist(picture_descriptors[i], picture_descriptors[j]) ** 2)
     return adjacency_matrix
