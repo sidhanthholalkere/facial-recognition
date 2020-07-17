@@ -27,12 +27,5 @@ class Profile:
         descriptor : np.ndarray
             vector that describes a face
         """
-        self.face_descriptors = np.append(self.face_descriptors, descriptor)
-        self.calculate_mean()
-
-    def calculate_mean(self):
-        """
-        calculates mean descriptor for face
-        """
-        # calculate mean descriptor
-        self.mean_descriptor = np.mean(self.face_descriptors, axis=0)
+        self.face_descriptors = np.vstack([self.face_descriptors, descriptor[0]])
+        self.mean_descriptor = np.mean(face_descriptors, axis=0)
