@@ -1,4 +1,4 @@
-from cosdist import cosine_dist
+from facial_recognition.utils import cosine_dist
 import numpy as np
 
 def cosdist_to_adjmatrix(picture_descriptors, threshold):
@@ -19,6 +19,7 @@ def cosdist_to_adjmatrix(picture_descriptors, threshold):
     adjacency_matrix = adjacency_matrix.reshape(len(picture_descriptors), len(picture_descriptors))
     for i in range(adjacency_matrix.shape[0]):
         for j in range(adjacency_matrix.shape[1]):
-            if cosdist.cosine_dist(picture_descriptors[i], picture_descriptors[j]) < threshold:
-                adjacency_matrix[i][j] = 1/(cosdist.cosine_dist(picture_descriptors[i], picture_descriptors[j]) ** 2)
+            if cosine_dist(picture_descriptors[i][0], picture_descriptors[j][0]) < threshold and i!=j:
+                adjacency_matrix[i][j] = 1/(cosine_dist(picture_descriptors[i][0], picture_descriptors[j][0]) ** 2)
+    #print(adjacency_matrix)
     return adjacency_matrix
