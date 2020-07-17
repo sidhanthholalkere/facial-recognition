@@ -1,4 +1,4 @@
-from node_class import node
+from . import node_class
 import numpy as np
 
 def adjmatrix_to_nodes(adj_matrix, descriptor):
@@ -22,7 +22,7 @@ def adjmatrix_to_nodes(adj_matrix, descriptor):
         for j in range(adj_matrix.shape[1]):
             if adj_matrix[i][j] != 0:
                 neighbors.append(j)
-        node_list.append(node(i, neighbors, descriptor[i]))
+        node_list.append(node_class.Node(i, neighbors, descriptor[i]))
     return node_list
 
 def whispers(adj_matrix, descriptor):
