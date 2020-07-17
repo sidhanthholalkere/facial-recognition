@@ -1,5 +1,5 @@
 import pickle
-import profile
+from profile_class import Profile
 from . import utils
 from pathlib import Path
 
@@ -51,7 +51,7 @@ class ProfileDatabase:
             prof = self.database.get(name)
             prof.add_descriptor(descriptor)
         else:
-            prof = profile.Profile(name, descriptor)
+            prof = Profile(name, descriptor)
 
         self.add_profile(name, prof)
 
@@ -72,7 +72,7 @@ class ProfileDatabase:
             prof = self.database.get(name)
             prof.add_descriptor(descriptor)
         else:
-            prof = profile.Profile(name, descriptor)
+            prof = Profile(name, descriptor)
 
         self.add_profile(name, prof)
 
