@@ -1,5 +1,5 @@
-import input
-from ProfileDatabase import *
+# import input
+from .ProfileDatabase import *
 
 DB = ProfileDatabase()
 
