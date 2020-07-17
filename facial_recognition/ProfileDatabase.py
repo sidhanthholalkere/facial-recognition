@@ -95,13 +95,24 @@ class ProfileDatabase:
         str
             name of person it matches
         """
-        for i, (k, v) in enumerate(self.database.items()):
-            #print(v.mean_descriptor.shape)
-            if utils.cosine_dist(descriptor, v.mean_descriptor) <= threshold:
-                v.add_descriptor(descriptor)
-                return v.name
+        distance = 1 # placeholders
+        profile_obj = None
+        descript_placehold = None
 
-        print('No match found')
+        for i, (k, v) in enumerate(self.database.items()):
+            cos_dis = utils.cosine_dist(descriptor, v.mean_descriptor)
+            print(cos_dis)
+            if cos_dis <= threshold and cos_dis < distance:
+                profile_obj = v
+                distance = cos_dis
+                descript_placehold = descriptor
+
+        if profile_obj is not None:
+            profile_obj.add_descriptor(descript_placehold)
+            print(profile_obj.name)
+            return profile_obj.name
+        else:
+            print('No match found')
 
     def load_database(self, path):
         """
