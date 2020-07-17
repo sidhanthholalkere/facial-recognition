@@ -1,8 +1,8 @@
 import pickle
 from pathlib import Path
 import profile
-import input
-import cosdist
+from . import input
+from . import cosdist
 
 class ProfileDatabase:
     """A database that stores the names and Profiles
@@ -113,6 +113,7 @@ class ProfileDatabase:
             
         """
         # loads dictionary/database of Profiles
+        path = "facial_recognition/" + path
         path = Path(path)
         with open(path, mode="rb") as opened_file:
             self.database = pickle.load(opened_file)
