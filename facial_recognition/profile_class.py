@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class Profile:
     def __init__(self, name, face_descriptors):
         """
