@@ -14,4 +14,4 @@ Run populate_database to load the image database
 ProfileDatabase class has functions to add/remove profiles, add images from camera or file, match image to profile
 DisplayImage shows inputted picture with boxes and names labeling faces
 """
-__all__ = ["DisplayImage", "populate_database", "ProfileDatabase", "whispers"]
+__all__ = ["utils", "populate_database", "ProfileDatabase", "whispers"]
