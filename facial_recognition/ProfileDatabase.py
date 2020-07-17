@@ -1,6 +1,6 @@
 import pickle
 import profile
-import utils
+from . import utils
 from pathlib import Path
 
 class ProfileDatabase:
