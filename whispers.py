@@ -41,7 +41,7 @@ def whispers(adj_matrix, descriptor):
 
         for i in range(len(rand_node.neighbors)):
             freq[rand_node.neighbors[i]] += adj_matrix[rand_node.id][rand_node.neighbors[i]]
-        rand_node(np.argmax(freq))
+        rand_node(node_list[np.argmax(freq)].label)
 
         alive_labels = []
 
