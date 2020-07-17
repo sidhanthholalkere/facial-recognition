@@ -118,6 +118,8 @@ def descriptors_from_img_path(path):
     """
     img = cv2.imread(path)
 
+    img = img[:, :, ::-1]
+
     model = FacenetModel()
 
     boxes, probabilities, _ = model.detect(img)
