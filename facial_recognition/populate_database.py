@@ -3,7 +3,7 @@ from .ProfileDatabase import *
 
 DB = ProfileDatabase()
 
-DB = DB.load_database("facialDB.pkl")
+DB.load_database("facialDB.pkl")
 
 print(DB.database.keys())
 
