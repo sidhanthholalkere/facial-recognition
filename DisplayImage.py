@@ -25,7 +25,7 @@ def display_image(pic, model, database):
     
     plt
 
-    the plot with the squares and names on it, and Unknow if there is no match 
+    the plot with the squares and names on it, and Unknown if there is no match 
     
     """
 
