@@ -1,8 +1,7 @@
 import pickle
-from pathlib import Path
 import profile
-from . import input
-from . import cosdist
+import utils
+from pathlib import Path
 
 class ProfileDatabase:
     """A database that stores the names and Profiles
@@ -46,7 +45,7 @@ class ProfileDatabase:
             img: Image
 
         """
-        descriptor = input.descriptors_from_camera()
+        descriptor = utils.descriptors_from_camera()
 
         if self.database.get(name) is not None:
             profile = self.database.get(name)
@@ -67,7 +66,7 @@ class ProfileDatabase:
             img: Image
 
         """
-        descriptor = input.descriptors_from_img_path(path)
+        descriptor = utils.descriptors_from_img_path(path)
 
         if self.database.get(name) is not None:
             prof = self.database.get(name)
@@ -94,13 +93,22 @@ class ProfileDatabase:
         str
             name of person it matches
         """
-        for i, (k, v) in enumerate(self.database.items()):
-            #print(v.mean_descriptor.shape)
-            if cosdist.cosine_dist(descriptor, v.mean_descriptor) <= threshold:
-                v.add_descriptor(descriptor)
-                return v.name
+        distance = 1 # placeholders
+        profile_obj = None
+        descript_placehold = None
 
-        print('No match found')
+        for i, (k, v) in enumerate(self.database.items()):
+            cos_dis = cosdist.cosine_dist(descriptor[0], v.mean_descriptor)
+            if cos_dis <= threshold and cos_dis < distance:
+                profile_obj = v
+                distance = cos_dis
+                descript_placehold = descriptor[0]
+
+        if profile_obj is not None:
+            profile_obj.add_descriptor(descriptor)
+            return profile_obj.name
+        else:
+            print('No match found')
 
     def load_database(self, path):
         """
