@@ -2,6 +2,8 @@ import pickle
 from .profile_class import Profile
 from . import utils
 from pathlib import Path
+import numpy as np
+
 
 class ProfileDatabase:
     """A database that stores the names and Profiles
@@ -49,8 +51,6 @@ class ProfileDatabase:
 
         if self.database.get(name) is not None:
             prof = self.database.get(name)
-            print(prof)
-            print(prof.__dict__.keys())
             prof.add_descriptor(descriptor)
         else:
             prof = Profile(name, descriptor)
@@ -96,7 +96,7 @@ class ProfileDatabase:
             name of person it matches
         """
         for i, (k, v) in enumerate(self.database.items()):
-            #print(v.mean_descriptor.shape)
+            # print(v.mean_descriptor.shape)
             if utils.cosine_dist(descriptor, v.mean_descriptor) <= threshold:
                 v.add_descriptor(descriptor)
                 return v.name
@@ -119,7 +119,7 @@ class ProfileDatabase:
         with open(path, mode="rb") as opened_file:
             self.database = pickle.load(opened_file)
 
-        #return 'file does not exist'
+        # return 'file does not exist'
 
     def save_database(self, filename):
         """
