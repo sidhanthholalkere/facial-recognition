@@ -1,7 +1,7 @@
 
 
-class node:
-    def __init__(self, ID, neighbors, descriptor, truth = None, file_path = None):
+class Node:
+    def __init__(self, ID, neighbors, descriptor, truth=None, file_path=None):
         """
         Parameters
         ----------
