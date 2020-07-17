@@ -70,12 +70,12 @@ class ProfileDatabase:
         descriptor = input.descriptors_from_img_path(path)
 
         if self.database.get(name) is not None:
-            profile = self.database.get(name)
-            profile.add_descriptor(descriptor)
+            prof = self.database.get(name)
+            prof.add_descriptor(descriptor)
         else:
-            profile = profile.Profile(name, descriptor)
+            prof = profile.Profile(name, descriptor)
 
-        self.add_profile(name, profile)
+        self.add_profile(name, prof)
 
     def match_descriptor(self, descriptor, threshold=0.5):
         """
@@ -95,7 +95,7 @@ class ProfileDatabase:
             name of person it matches
         """
         for i, (k, v) in enumerate(self.database.items()):
-            print(v.mean_descriptor.shape)
+            #print(v.mean_descriptor.shape)
             if cosdist.cosine_dist(descriptor, v.mean_descriptor) <= threshold:
                 v.add_descriptor(descriptor)
                 return v.name
@@ -128,3 +128,9 @@ class ProfileDatabase:
         """
         with open(filename, mode="wb") as opened_file:
             return pickle.dump(self.database, opened_file)
+
+    def change_means_into_512arr(self):
+        """ changes each profile mean bc too lazy to reload db
+        """
+        for i, (k, v) in enumerate(self.database.items()):
+            print(v.mean_descriptor.shape)
