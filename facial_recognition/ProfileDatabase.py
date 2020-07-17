@@ -1,8 +1,7 @@
 import pickle
-from pathlib import Path
 import profile
-from . import input
-from . import cosdist
+import utils
+from pathlib import Path
 
 class ProfileDatabase:
     """A database that stores the names and Profiles
@@ -46,7 +45,7 @@ class ProfileDatabase:
             img: Image
 
         """
-        descriptor = input.descriptors_from_camera()
+        descriptor = utils.descriptors_from_camera()
 
         if self.database.get(name) is not None:
             profile = self.database.get(name)
@@ -67,7 +66,7 @@ class ProfileDatabase:
             img: Image
 
         """
-        descriptor = input.descriptors_from_img_path(path)
+        descriptor = utils.descriptors_from_img_path(path)
 
         if self.database.get(name) is not None:
             prof = self.database.get(name)
@@ -96,7 +95,7 @@ class ProfileDatabase:
         """
         for i, (k, v) in enumerate(self.database.items()):
             #print(v.mean_descriptor.shape)
-            if cosdist.cosine_dist(descriptor, v.mean_descriptor) <= threshold:
+            if utils.cosine_dist(descriptor, v.mean_descriptor) <= threshold:
                 v.add_descriptor(descriptor)
                 return v.name
 
